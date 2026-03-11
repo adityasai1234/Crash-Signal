@@ -1,3 +1,19 @@
+import os
+import json
+import numpy as np
+import pandas as pd
+import yfinance as yf
+from fredapi import Fred
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import requests
+import warnings
+warnings.filterwarnings("ignore")
+
+load_dotenv()
+
+fred = Fred(api_key=os.getenv("FRED_API_KEY", ""))
+
 INDICATORS = {
     "vix":                  {"src": "yahoo", "ticker": "^VIX"},
     "ted_spread":           {"src": "fred",  "series": "TEDRATE"},
@@ -85,3 +101,93 @@ def get_direction(change_pct: float) -> str:
     if change_pct < -0.5:
         return "DOWN"
     return "NEUTRAL"
+
+def fetch_yahoo(ticker: str) -> dict:
+  """
+  Fetch latest close + prev close from yfinance.
+  Returns dict with value, prev, change_pct, date.
+  Returns {value: None, change_pct: 0} on any failure.
+  Never raises.
+  """
+  try:
+    t    = yf.Ticker(ticker)
+    hist = t.history(period="5d")
+    if len(hist) < 2:
+      return {"value": None, "change_pct": 0, "date": None}
+    val    = float(hist["Close"].iloc[-1])
+    prev   = float(hist["Close"].iloc[-2])
+    change = (val - prev) / abs(prev) * 100 if prev != 0 else 0
+    return {
+      "value":      round(val, 4),
+      "prev":       round(prev, 4),
+      "change_pct": round(change, 3),
+      "date":       str(hist.index[-1].date())
+    }
+  except Exception as e:
+    print(f"Yahoo fetch failed {ticker}: {e}")
+    return {"value": None, "change_pct": 0, "date": None}
+
+def fetch_fred_series(series: str) -> dict:
+  """
+  Fetch latest value from FRED.
+  Looks back 90 days for weekend/holiday gaps.
+  Returns dict with value, prev, change_pct, date.
+  Returns {value: None, change_pct: 0} on any failure.
+  Never raises.
+  """
+  try:
+    since = (datetime.today() - timedelta(days=90)).strftime("%Y-%m-%d")
+    s = fred.get_series(series, observation_start=since)
+    s = s.dropna()
+    if len(s) < 2:
+      return {"value": None, "change_pct": 0, "date": None}
+    val    = float(s.iloc[-1])
+    prev   = float(s.iloc[-2])
+    change = (val - prev) / abs(prev) * 100 if prev != 0 else 0
+    return {
+      "value":      round(val, 6),
+      "prev":       round(prev, 6),
+      "change_pct": round(change, 3),
+      "date":       str(s.index[-1].date())
+    }
+  except Exception as e:
+    print(f"FRED fetch failed {series}: {e}")
+    return {"value": None, "change_pct": 0, "date": None}
+
+def fetch_all_indicators() -> dict:
+  """
+  Fetch all 15 indicators.
+  Returns dict keyed by indicator name.
+  Each value is a complete IndicatorReading-ready dict.
+  Failed fetches return value=None but never crash.
+  """
+  results = {}
+  for key, cfg in INDICATORS.items():
+    if cfg["src"] == "yahoo":
+      raw = fetch_yahoo(cfg["ticker"])
+    else:
+      raw = fetch_fred_series(cfg["series"])
+
+    val = raw.get("value")
+
+    if val is not None:
+      is_stressed, contrib = compute_stress_contribution(key, val)
+    else:
+      is_stressed, contrib = False, 0.0
+
+    change  = raw.get("change_pct", 0.0)
+    _, color = get_stress_level(contrib if is_stressed else 20)
+
+    results[key] = {
+      "name":               DISPLAY_NAMES[key],
+      "key":                key,
+      "value":              val,
+      "change_pct":         change,
+      "is_stressed":        is_stressed,
+      "stress_contribution":contrib,
+      "direction":          get_direction(change),
+      "color":              color,
+      "date":               raw.get("date")
+    }
+  return results
+
