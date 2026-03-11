@@ -294,3 +294,45 @@ def fetch_news_sentiment() -> dict:
     print(f"News fetch/finbert failed: {e}")
     return fallback
 
+_cache = {
+  "indicators":   {},
+  "news":         {"stress_score": 50.0, "items": []},
+  "last_updated": None,
+  "update_count": 0
+}
+
+
+def refresh_cache() -> None:
+  """
+  Fetch fresh indicators + news. Update _cache.
+  Called by APScheduler every 60 seconds.
+  Also called once at startup.
+  Never raises — catches all exceptions.
+  Prints timestamp on each call.
+  """
+  global _cache
+  try:
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] "
+          f"Refreshing cache...")
+    indicators = fetch_all_indicators()
+    news       = fetch_news_sentiment()
+    _cache["indicators"]   = indicators
+    _cache["news"]         = news
+    _cache["last_updated"] = datetime.now().isoformat()
+    _cache["update_count"] += 1
+    n_stressed = sum(
+      1 for v in indicators.values()
+      if v.get("is_stressed")
+    )
+    print(f"  ✅ Refreshed | "
+          f"indicators={len(indicators)} | "
+          f"stressed={n_stressed} | "
+          f"news_stress={news['stress_score']:.1f}")
+  except Exception as e:
+    print(f"  ❌ Cache refresh failed: {e}")
+
+
+def get_cache() -> dict:
+  """Return current cache. Always returns something."""
+  return _cache
+
