@@ -1,6 +1,10 @@
 import torch
 import torch.nn as nn
 from torch.nn import Linear, LayerNorm, Dropout, ELU, Identity, ModuleList, Sequential, ReLU, Sigmoid, LSTM, MultiheadAttention
+import os
+import json
+import joblib
+import numpy as np
 
 class GRN(nn.Module):
     def __init__(self, in_d, hid_d, out_d, drop=0.5):
@@ -77,3 +81,65 @@ class CrashSignalTFT(nn.Module):
         x = self.norm(x)
         f = x[:, -1, :]
         return self.clf(f), self.stress(f) * 100, w
+
+class CrashSignalModel:
+    def __init__(self):
+        self.model = None
+        self.scaler = None
+        self.config = None
+        self.feature_cols = None
+        self.window_size = None
+        self.loaded = False
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    def load(self, artifacts_dir="artifacts"):
+        config_path = os.path.join(artifacts_dir, "model_config.json")
+        model_path = os.path.join(artifacts_dir, "crashsignal_model.pth")
+        scaler_path = os.path.join(artifacts_dir, "crashsignal_scaler.pkl")
+
+        for path in [config_path, model_path, scaler_path]:
+            if not os.path.exists(path):
+                raise FileNotFoundError(f"Missing artifact: {path}")
+
+        with open(config_path, 'r') as f:
+            self.config = json.load(f)
+
+        self.feature_cols = self.config["feature_cols"]
+        self.window_size = self.config["window_size"]
+
+        self.model = CrashSignalTFT(
+            input_dim=self.config["input_dim"],
+            hidden_dim=self.config["hidden_dim"],
+            lstm_layers=self.config["lstm_layers"],
+            num_heads=self.config["num_heads"],
+            num_classes=self.config["num_classes"],
+            dropout=self.config["dropout"]
+        )
+        self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+        self.model.to(self.device)
+        self.model.eval()
+
+        self.scaler = joblib.load(scaler_path)
+        self.loaded = True
+
+        n_params = sum(p.numel() for p in self.model.parameters())
+        print(f"✅ Model loaded | device={self.device} | params={n_params:,}")
+
+    def predict(self, window: np.ndarray) -> dict:
+        if not self.loaded:
+            raise RuntimeError("Model is not loaded")
+
+        scaled = self.scaler.transform(window)
+        tensor = torch.tensor(scaled[np.newaxis, :, :], dtype=torch.float32).to(self.device)
+
+        with torch.no_grad():
+            lg, st, wt = self.model(tensor)
+            probs = torch.softmax(lg, dim=-1)
+
+        return {
+            "stress_score": float(st.squeeze().cpu()),
+            "label": int(lg.argmax(1).cpu()),
+            "probabilities": probs.cpu().numpy()[0].tolist()
+        }
+
+ml_model = CrashSignalModel()
