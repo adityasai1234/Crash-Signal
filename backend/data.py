@@ -191,3 +191,106 @@ def fetch_all_indicators() -> dict:
     }
   return results
 
+_finbert_tokenizer = None
+_finbert_model     = None
+
+def _load_finbert():
+  """Load FinBERT once. Cache in module globals."""
+  global _finbert_tokenizer, _finbert_model
+  if _finbert_tokenizer is None:
+    from transformers import (
+      BertTokenizer,
+      BertForSequenceClassification
+    )
+    import torch
+    print("Loading FinBERT...")
+    _finbert_tokenizer = BertTokenizer.from_pretrained(
+      "ProsusAI/finbert"
+    )
+    _finbert_model = BertForSequenceClassification.from_pretrained(
+        "ProsusAI/finbert"
+    )
+    _finbert_model.eval()
+    print("FinBERT loaded ✅")
+  return _finbert_tokenizer, _finbert_model
+
+def fetch_news_sentiment() -> dict:
+  fallback = {"stress_score": 50.0, "items": []}
+  api_key = os.getenv("NEWS_API_KEY")
+  if not api_key:
+    return fallback
+
+  try:
+    url = "https://newsapi.org/v2/everything"
+    params = {
+      "q": "stock market OR recession OR Federal Reserve OR inflation OR financial crisis OR interest rates",
+      "from": (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d"),
+      "sortBy": "publishedAt",
+      "language": "en",
+      "pageSize": 30,
+      "apiKey": api_key
+    }
+    resp = requests.get(url, params=params, timeout=10)
+    if resp.status_code != 200:
+      return fallback
+
+    articles = resp.json().get("articles", [])
+    headlines = []
+    for a in articles:
+      title = a.get("title") or ""
+      desc = a.get("description") or ""
+      if "[Removed]" in title: continue
+      text = title
+      if desc and text != desc:
+        text += ". " + desc
+      if text.strip():
+        headlines.append({"text": text, "source": a.get("source", {}).get("name", "newsapi")})
+    
+    if not headlines:
+      return fallback
+    headlines = headlines[:20]
+
+    tokenizer, model = _load_finbert()
+    import torch
+
+    texts = [h["text"] for h in headlines]
+    inputs = tokenizer(texts, padding=True, truncation=True, max_length=128, return_tensors="pt")
+    
+    with torch.no_grad():
+      outputs = model(**inputs)
+      probs = torch.softmax(outputs.logits, dim=-1)
+    
+    items = []
+    neg_scores = []
+    pos_scores = []
+
+    for i, h in enumerate(headlines):
+      prob = probs[i]
+      neg = float(prob[1])
+      pos = float(prob[0])
+      
+      labels = ["positive", "negative", "neutral"]
+      sentiment = labels[prob.argmax()]
+      
+      items.append({
+        "headline": h["text"],
+        "sentiment": sentiment,
+        "score": neg,
+        "source": h["source"]
+      })
+      neg_scores.append(neg)
+      pos_scores.append(pos)
+    
+    items.sort(key=lambda x: x["score"], reverse=True)
+    news_stress = ((np.mean(neg_scores) - np.mean(pos_scores) + 1) / 2) * 100
+    news_stress = float(np.clip(news_stress, 0, 100))
+
+    return {
+      "stress_score": round(news_stress, 2),
+      "items": items[:8]
+    }
+
+  except Exception as e:
+    print(f"News fetch/finbert failed: {e}")
+    return fallback
+
