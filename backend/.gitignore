@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+artifacts/*.pth
+artifacts/*.pkl
+artifacts/*.parquet
+*.egg-info/
+.DS_Store
+venv/
+.venv/
