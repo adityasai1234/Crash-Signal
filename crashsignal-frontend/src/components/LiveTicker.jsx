@@ -68,12 +68,14 @@ export default function LiveTicker({ indicators = [] }) {
 
           const color = indicator.is_stressed ? (indicator.change < 0 ? 'var(--orange)' : 'var(--red)') : 'var(--text-dim)';
           const textShadow = indicator.is_stressed ? `0 0 6px ${color}` : 'none';
-          const changeStr = indicator.change > 0 ? `+${indicator.change}%` : `${indicator.change}%`;
+          const changeStr = indicator.change != null 
+            ? (indicator.change > 0 ? `+${indicator.change}%` : `${indicator.change}%`) 
+            : '——%';
 
           return (
             <span key={index} style={{ display: 'inline-flex', alignItems: 'center' }}>
               <span style={{ color: 'var(--text)', marginRight: '8px' }}>{indicator.key}</span>
-              <span style={{ color, textShadow, marginRight: '8px' }}>{indicator.value !== undefined ? indicator.value.toFixed(2) : '——'}</span>
+              <span style={{ color, textShadow, marginRight: '8px' }}>{indicator.value != null ? indicator.value.toFixed(2) : '——'}</span>
               <span style={{ color, textShadow }}>{arrow} {changeStr}</span>
               <span style={{ margin: '0 16px', color: 'var(--border)' }}>·</span>
             </span>
