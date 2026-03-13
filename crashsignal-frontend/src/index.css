@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg:          #000000;
+  --bg-panel:    #040810;
+  --bg-card:     #080f1a;
+  --border:      #0d1f35;
+  --border-dim:  #071525;
+  --text:        #c8d8e8;
+  --text-dim:    #3a5068;
+  --text-bright: #e8f4ff;
+  --green:       #00ff9d;
+  --blue:        #00a8ff;
+  --yellow:      #ffc400;
+  --orange:      #ff6b00;
+  --red:         #ff0040;
+  --accent:      #00ff9d;
+  --grid:        #0a1628;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Scan line texture on all panels */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Panel label style */
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-label::before {
+  content: '▮';
+  color: var(--accent);
+  font-size: 8px;
+}
+
+/* Pulsing dot */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green); }
+  50%       { opacity: 0.3; box-shadow: none; }
+}
+
+/* Radar ping for stressed elements */
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(3);   opacity: 0; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+
+/* Stressed glow */
+.stressed {
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Grid overlay effect */
+.grid-overlay {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
