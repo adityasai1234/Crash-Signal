@@ -3,11 +3,18 @@ import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps
 import { getStressColor, formatTime } from '../api/client';
 
 const LOCATIONS = [
-  { city: "NEW YORK", coords: [-74.006, 40.7128], keys: ["vix", "credit_spread_hy", "credit_spread_ig", "sp500", "dollar_index", "gold_ratio", "vvix"], label: "FINANCIAL DISTRICT" },
-  { city: "WASHINGTON D.C.", coords: [-77.0369, 38.9072], keys: ["ted_spread", "unemployment_claims", "real_rates", "bank_stress"], label: "FEDERAL RESERVE" },
-  { city: "CHICAGO", coords: [-87.6298, 41.8781], keys: ["financial_conditions"], label: "CHICAGO FED" },
-  { city: "ANN ARBOR", coords: [-83.7430, 42.2808], keys: ["consumer_sentiment"], label: "UMICH SURVEY" },
-  { city: "ATLANTA", coords: [-84.3880, 33.7490], keys: ["manufacturing_pmi"], label: "FED MANUFACTURING" }
+  { id:"nyc",     city:"NEW YORK", label:"WALL STREET", coords:[-74.006, 40.7128], keys:["vix","credit_spread_hy","credit_spread_ig","sp500","dollar_index","gold_ratio","vvix"] },
+  { id:"dc",      city:"WASHINGTON D.C.", label:"FEDERAL RESERVE", coords:[-77.0369, 38.9072], keys:["ted_spread","unemployment_claims","real_rates","bank_stress"] },
+  { id:"chi",     city:"CHICAGO", label:"CHICAGO FED / CBOT", coords:[-87.6298, 41.8781], keys:["financial_conditions"] },
+  { id:"aa",      city:"ANN ARBOR", label:"UMICH CONSUMER SURVEY", coords:[-83.7430, 42.2808], keys:["consumer_sentiment"] },
+  { id:"atl",     city:"ATLANTA", label:"FED MANUFACTURING", coords:[-84.3880, 33.7490], keys:["manufacturing_pmi"] },
+  { id:"sf",      city:"SAN FRANCISCO", label:"SF FED / TECH SENTIMENT", coords:[-122.4194, 37.7749], keys:["sp500","vvix"] },
+  { id:"dal",     city:"DALLAS", label:"DALLAS FED / ENERGY", coords:[-96.7970, 32.7767], keys:["dollar_index"] },
+  { id:"bos",     city:"BOSTON", label:"BOSTON FED", coords:[-71.0589, 42.3601], keys:["real_rates","ted_spread"] },
+  { id:"kc",      city:"KANSAS CITY", label:"KC FED / AGRICULTURE", coords:[-94.5786, 39.0997], keys:["financial_conditions"] },
+  { id:"mia",     city:"MIAMI", label:"SOUTHEAST MARKETS", coords:[-80.1918, 25.7617], keys:["credit_spread_hy"] },
+  { id:"min",     city:"MINNEAPOLIS", label:"MINNEAPOLIS FED", coords:[-93.2650, 44.9778], keys:["consumer_sentiment","manufacturing_pmi"] },
+  { id:"sea",     city:"SEATTLE", label:"PACIFIC NORTHWEST", coords:[-122.3321, 47.6062], keys:["vix","sp500"] }
 ];
 
 export default function ThreatMap({ indicators = [] }) {
@@ -96,7 +103,7 @@ export default function ThreatMap({ indicators = [] }) {
             </Geographies>
 
             {locationData.map((loc, index) => (
-              <Marker key={index} coordinates={loc.coords} onClick={() => setSelectedLoc(loc)}>
+              <Marker key={loc.id} coordinates={loc.coords} onClick={() => setSelectedLoc(loc)}>
                 {loc.isHot && (
                   <circle
                     r={16}
@@ -106,7 +113,7 @@ export default function ThreatMap({ indicators = [] }) {
                     opacity={0.6}
                     style={{
                       animation: 'ping 2s ease-out infinite',
-                      animationDelay: `${index * 0.4}s`,
+                      animationDelay: `${index * 0.15}s`,
                       transformOrigin: '0 0'
                     }}
                   />
@@ -120,7 +127,7 @@ export default function ThreatMap({ indicators = [] }) {
                     opacity={0.3}
                     style={{
                       animation: 'ping 2.5s ease-out infinite',
-                      animationDelay: `${index * 0.4 + 0.5}s`,
+                      animationDelay: `${index * 0.15 + 0.5}s`,
                       transformOrigin: '0 0'
                     }}
                   />
