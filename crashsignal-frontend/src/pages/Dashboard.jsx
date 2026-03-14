@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchLive, fetchHistory, triggerRefresh, getStressColor, getStressLevel } from '../api/client';
 
 import Header from '../components/Header';
 import LiveTicker from '../components/LiveTicker';
+import StressVelocity from '../components/StressVelocity';
+import ConflictDetector from '../components/ConflictDetector';
 import StressMeter from '../components/StressMeter';
 import IndicatorPanel from '../components/IndicatorPanel';
+import CrashDNA from '../components/CrashDNA';
 import ThreatMap from '../components/ThreatMap';
 import StressTimeline from '../components/StressTimeline';
 import NewsPanel from '../components/NewsPanel';
@@ -197,6 +201,10 @@ export default function Dashboard() {
 
       <LiveTicker indicators={live?.indicators ?? []} />
 
+      <StressVelocity currentScore={score} histPoints={hist?.points ?? []} />
+
+      <ConflictDetector indicators={live?.indicators ?? []} />
+
       <div style={{
         display: 'grid',
         gridTemplateColumns: mobile ? '1fr' : '38% 62%',
@@ -210,6 +218,33 @@ export default function Dashboard() {
           lastUpdated={live?.last_updated}
         />
         <IndicatorPanel indicators={live?.indicators ?? []} />
+      </div>
+
+      <div style={{ margin: '1px 0', position: 'relative' }}>
+        <CrashDNA
+          indicators={live?.indicators ?? []}
+          analogs={live?.analogs ?? []}
+          importance={live?.variable_importance ?? []}
+        />
+        <Link to="/crash-dna" style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          fontSize: '8px',
+          fontFamily: "'JetBrains Mono'",
+          color: 'var(--text-dim)',
+          letterSpacing: '0.1em',
+          textDecoration: 'none',
+          border: '1px solid var(--border)',
+          padding: '3px 8px',
+          opacity: 0.6,
+          transition: 'opacity 0.2s'
+        }}
+        onMouseEnter={e => e.currentTarget.style.opacity = 1}
+        onMouseLeave={e => e.currentTarget.style.opacity = 0.6}
+        >
+          [ FULL VIEW ]
+        </Link>
       </div>
 
       <div style={{ margin: '1px 0' }}>
@@ -233,7 +268,28 @@ export default function Dashboard() {
           newsStress={live?.news_stress ?? 50}
           items={live?.news_items ?? []}
         />
-        <AnalogPanel analogs={live?.analogs ?? []} />
+        <div style={{ position: 'relative' }}>
+          <AnalogPanel analogs={live?.analogs ?? []} />
+          <Link to="/pattern" style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            fontSize: '8px',
+            fontFamily: "'JetBrains Mono'",
+            color: 'var(--text-dim)',
+            letterSpacing: '0.1em',
+            textDecoration: 'none',
+            border: '1px solid var(--border)',
+            padding: '3px 8px',
+            opacity: 0.6,
+            transition: 'opacity 0.2s'
+          }}
+          onMouseEnter={e => e.currentTarget.style.opacity = 1}
+          onMouseLeave={e => e.currentTarget.style.opacity = 0.6}
+          >
+            [ FULL VIEW ]
+          </Link>
+        </div>
       </div>
     </div>
   );
