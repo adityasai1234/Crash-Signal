@@ -1,0 +1,415 @@
+{
+  "headlines": [
+    {
+      "text": "Bill Ackman's hedge fund, Pershing Square, just filed for an IPO. Famed investor Bill Ackman is taki",
+      "positive": 0.0437,
+      "negative": 0.0172,
+      "neutral": 0.9391,
+      "label": "neutral"
+    },
+    {
+      "text": "$500,000 gold RTX 5090 is now worth $830,000 thanks to rocketing commodity prices \u2014 Asus ROG Astral ",
+      "positive": 0.7407,
+      "negative": 0.0095,
+      "neutral": 0.2499,
+      "label": "positive"
+    },
+    {
+      "text": "Taking Stock of the Proposal to Codify Gender Apartheid in the Crimes against Humanity Convention. [",
+      "positive": 0.0323,
+      "negative": 0.0494,
+      "neutral": 0.9183,
+      "label": "neutral"
+    },
+    {
+      "text": "Bill Ackman's Pershing Square files for IPO on the NYSE. ",
+      "positive": 0.0251,
+      "negative": 0.0396,
+      "neutral": 0.9353,
+      "label": "neutral"
+    },
+    {
+      "text": "28 Things People Hated But Ended Up Loving. Whether we are making financial decisions in the stock m",
+      "positive": 0.0267,
+      "negative": 0.3004,
+      "neutral": 0.6729,
+      "label": "neutral"
+    },
+    {
+      "text": "February SIP dip is a calendar glitch, March numbers will be much higher, says SBI MF's DP Singh. Fe",
+      "positive": 0.0648,
+      "negative": 0.9028,
+      "neutral": 0.0324,
+      "label": "negative"
+    },
+    {
+      "text": "In-Hand Images & In-Stock Alert: McFarlane Toys DC Multiverse Theatrical Superman 1978 Figure. Shown",
+      "positive": 0.0262,
+      "negative": 0.0279,
+      "neutral": 0.9458,
+      "label": "neutral"
+    },
+    {
+      "text": "Big unions want to sweeten pensions. Albany is rallying with them.. A rally to \"Fix Tier VI.\"\n \n\nCri",
+      "positive": 0.0346,
+      "negative": 0.8007,
+      "neutral": 0.1647,
+      "label": "negative"
+    },
+    {
+      "text": "JFB Construction Holdings Announces 2-for-1 Stock Split. ~ Proactive Action Taken to Align Share Str",
+      "positive": 0.4569,
+      "negative": 0.0124,
+      "neutral": 0.5307,
+      "label": "neutral"
+    },
+    {
+      "text": "'Pro-worker AI,' streaming fatalities, and other fascinating new economic studies. From artificial i",
+      "positive": 0.0616,
+      "negative": 0.0205,
+      "neutral": 0.9179,
+      "label": "neutral"
+    },
+    {
+      "text": "Stock Market Turmoil: 3 Crucial Things to Do Now to Protect Your Portfolio. ",
+      "positive": 0.0578,
+      "negative": 0.0554,
+      "neutral": 0.8868,
+      "label": "neutral"
+    },
+    {
+      "text": "NIO Inc. Reports Unaudited Fourth Quarter and Full Year 2025 Financial Results. Quarterly Adjusted P",
+      "positive": 0.1264,
+      "negative": 0.0402,
+      "neutral": 0.8334,
+      "label": "neutral"
+    },
+    {
+      "text": "Tokenized stocks surpass $1B as Ondo, xStocks dominate sector. RWA.xyz data shows Ondo and Backed Fi",
+      "positive": 0.8397,
+      "negative": 0.0197,
+      "neutral": 0.1405,
+      "label": "positive"
+    },
+    {
+      "text": "Elon Musk's SpaceX weighs Nasdaq listing after seeking early index entry. Elon Musk's rocket and sat",
+      "positive": 0.1972,
+      "negative": 0.0144,
+      "neutral": 0.7884,
+      "label": "neutral"
+    },
+    {
+      "text": "MAGA Are Turning On United Airlines As Chief Executive Scott Kirby is Accused of Being a \u2018Wolf in Sh",
+      "positive": 0.0144,
+      "negative": 0.9238,
+      "neutral": 0.0619,
+      "label": "negative"
+    },
+    {
+      "text": "Federico Savini on Degrowth and Its Future. But to the extent that economic growth and carbon-fuel u",
+      "positive": 0.0258,
+      "negative": 0.1428,
+      "neutral": 0.8314,
+      "label": "neutral"
+    },
+    {
+      "text": "Gcash Introduces Pera Coach AI Financial Assistant. GCash has introduced Pera Coach, an AI-powered f",
+      "positive": 0.164,
+      "negative": 0.009,
+      "neutral": 0.8269,
+      "label": "neutral"
+    },
+    {
+      "text": "BBTS in-Stock Alert: Hasbro G.I. Joe Classified Series #187 Night-Viper Action Figure. The new Hasbr",
+      "positive": 0.0478,
+      "negative": 0.0126,
+      "neutral": 0.9396,
+      "label": "neutral"
+    },
+    {
+      "text": "TransUnion Investor Day to Highlight Its Next Chapter of Growth \u2013 Innovation at Scale, Value that En",
+      "positive": 0.0377,
+      "negative": 0.017,
+      "neutral": 0.9453,
+      "label": "neutral"
+    },
+    {
+      "text": "Iran vows to fight on and block all Gulf oil. Iran\u00a0vowed on Tuesday that not one litre of oil would ",
+      "positive": 0.0286,
+      "negative": 0.8352,
+      "neutral": 0.1362,
+      "label": "negative"
+    },
+    {
+      "text": "Bunker Hill Announces Changes to Its Finance Team as Part of Concentrating Its Executive Leadership ",
+      "positive": 0.0844,
+      "negative": 0.027,
+      "neutral": 0.8886,
+      "label": "neutral"
+    },
+    {
+      "text": "Bunker Hill Announces Changes to Its Finance Team as Part of Concentrating Its Executive Leadership ",
+      "positive": 0.0749,
+      "negative": 0.0261,
+      "neutral": 0.899,
+      "label": "neutral"
+    },
+    {
+      "text": "Goa comes alive as rhythms of Shigmo echo across the streets of Goa. Goa has come alive with the vib",
+      "positive": 0.5382,
+      "negative": 0.0192,
+      "neutral": 0.4425,
+      "label": "positive"
+    },
+    {
+      "text": "Boss thought the employee was the problem and scolded him. One meeting changed everything and boss h",
+      "positive": 0.0173,
+      "negative": 0.9272,
+      "neutral": 0.0554,
+      "label": "negative"
+    },
+    {
+      "text": "PlayStation 5 Pro India launch soon? Certification surfaces on BIS portal under model CFI-7121 after",
+      "positive": 0.4501,
+      "negative": 0.0108,
+      "neutral": 0.5391,
+      "label": "neutral"
+    },
+    {
+      "text": "Pok\u00e9mon Pokopia is sold out at many major retailers, but it\u2019s really not difficult to see why. Pok\u00e9m",
+      "positive": 0.0109,
+      "negative": 0.9577,
+      "neutral": 0.0314,
+      "label": "negative"
+    },
+    {
+      "text": "Strategy logs record STRC equity issuance on Monday, buys estimated 1,420 bitcoin. The company amend",
+      "positive": 0.1931,
+      "negative": 0.0135,
+      "neutral": 0.7934,
+      "label": "neutral"
+    },
+    {
+      "text": "Organigram Announces Mailing of Management Information Circular in Connection with Annual General an",
+      "positive": 0.0373,
+      "negative": 0.0202,
+      "neutral": 0.9426,
+      "label": "neutral"
+    },
+    {
+      "text": "Volkswagen flags a tough year ahead as 2025 profit halves on tariffs, China competition. Volkswagen ",
+      "positive": 0.0087,
+      "negative": 0.976,
+      "neutral": 0.0153,
+      "label": "negative"
+    },
+    {
+      "text": "Strategy Buys Another 17,994 BTC In $1.28 Billion Bitcoin Purchase. Bitcoin treasury company Strateg",
+      "positive": 0.8981,
+      "negative": 0.0085,
+      "neutral": 0.0933,
+      "label": "positive"
+    },
+    {
+      "text": "I wish the Fatal Frame 2: Crimson Butterfly remake had left the original alone. For survival horror ",
+      "positive": 0.0384,
+      "negative": 0.1679,
+      "neutral": 0.7937,
+      "label": "neutral"
+    },
+    {
+      "text": "Kaskela Law Firm Announces Stockholder Investigation of Kelly Services, Inc. (NASDAQ: KELYA) and Enc",
+      "positive": 0.0322,
+      "negative": 0.2063,
+      "neutral": 0.7615,
+      "label": "neutral"
+    },
+    {
+      "text": "Esperion Reports Fourth Quarter and Full Year 2025 Financial Results and Provides Business Update. \u2013",
+      "positive": 0.9499,
+      "negative": 0.0159,
+      "neutral": 0.0341,
+      "label": "positive"
+    },
+    {
+      "text": "LiveOne (Nasdaq: LVO) Signs Multi-Year Extension with Merlin. LOS ANGELES, March 10, 2026 (GLOBE NEW",
+      "positive": 0.9225,
+      "negative": 0.0099,
+      "neutral": 0.0676,
+      "label": "positive"
+    },
+    {
+      "text": "This War With Iran Will Cost More Than We Can Afford. With \u201caffordability\u201d the Democrats\u2019 watchword ",
+      "positive": 0.206,
+      "negative": 0.1848,
+      "neutral": 0.6092,
+      "label": "neutral"
+    },
+    {
+      "text": "Gold: an asset for troubled times. Not so mellow yellow\u2026\nThe post Gold: an asset for troubled times ",
+      "positive": 0.0531,
+      "negative": 0.0179,
+      "neutral": 0.9291,
+      "label": "neutral"
+    },
+    {
+      "text": "Stagwell Posts $2.9B Revenue for 2025 and Predicts Record New Business Ahead. Stagwell reported mode",
+      "positive": 0.9481,
+      "negative": 0.0193,
+      "neutral": 0.0327,
+      "label": "positive"
+    },
+    {
+      "text": "Emerging Markets Get Reprieve as Trump Hints at Early End to War. Emerging-market currencies and sto",
+      "positive": 0.8695,
+      "negative": 0.0877,
+      "neutral": 0.0429,
+      "label": "positive"
+    },
+    {
+      "text": "5 Differences Between Hotels and Private Mountain Homes. Planning a mountain getaway? One of the big",
+      "positive": 0.0493,
+      "negative": 0.0366,
+      "neutral": 0.9141,
+      "label": "neutral"
+    },
+    {
+      "text": "Infrastructure, finance, and the sale of the future. Mitchell\u2019s new book reinforces this essential p",
+      "positive": 0.1378,
+      "negative": 0.0157,
+      "neutral": 0.8465,
+      "label": "neutral"
+    },
+    {
+      "text": "1.5 lakh kg expired Amul-branded food destroyed! How Jaipur firm planned to resell products by chang",
+      "positive": 0.0149,
+      "negative": 0.8133,
+      "neutral": 0.1718,
+      "label": "negative"
+    },
+    {
+      "text": "Giant $350 price drop hits this 1TB M3 iPad Air at Amazon today, M4 models up to $100 off. The new M",
+      "positive": 0.0514,
+      "negative": 0.8524,
+      "neutral": 0.0962,
+      "label": "negative"
+    },
+    {
+      "text": "I'm finding all the best deals from the Amazon Spring Deal Days sale \u2014 40+ top tech offers from \u00a313.",
+      "positive": 0.1389,
+      "negative": 0.0148,
+      "neutral": 0.8463,
+      "label": "neutral"
+    },
+    {
+      "text": "Heeseung Leaves ENHYPEN to pursue solo career, stays with BELIFT Lab; pens emotional farewell note t",
+      "positive": 0.065,
+      "negative": 0.0181,
+      "neutral": 0.9169,
+      "label": "neutral"
+    },
+    {
+      "text": "RBI examining complaint against Standard Chartered Bank's asset sales, minister says. RBI is investi",
+      "positive": 0.0252,
+      "negative": 0.5584,
+      "neutral": 0.4164,
+      "label": "negative"
+    },
+    {
+      "text": "A top economist says he sees a 'very significant' recession coming in 2027 as fiscal stimulus and AI",
+      "positive": 0.0123,
+      "negative": 0.9654,
+      "neutral": 0.0223,
+      "label": "negative"
+    },
+    {
+      "text": "AI isn\u2019t killing jobs yet\u2014CEOs are using layoffs to fund a $2.5 trillion arms race. Also: All the ne",
+      "positive": 0.0248,
+      "negative": 0.445,
+      "neutral": 0.5302,
+      "label": "neutral"
+    },
+    {
+      "text": "HBX Group and Traveloka expand strategic partnership to deepen APAC supply and accelerate global dis",
+      "positive": 0.944,
+      "negative": 0.0156,
+      "neutral": 0.0404,
+      "label": "positive"
+    },
+    {
+      "text": "India invokes special act to ensure gas supplies. India has also directed refineries to boost produc",
+      "positive": 0.2594,
+      "negative": 0.0688,
+      "neutral": 0.6718,
+      "label": "neutral"
+    },
+    {
+      "text": "Jeff Green Is Betting $150M That The Trade Desk Becomes AI Era Infrastructure. The Trade Desk CEO Je",
+      "positive": 0.0704,
+      "negative": 0.01,
+      "neutral": 0.9196,
+      "label": "neutral"
+    }
+  ],
+  "stress_score": 50.767556818181816,
+  "label_counts": {
+    "neutral": 48,
+    "negative": 23,
+    "positive": 17
+  },
+  "top_negative": [
+    {
+      "text": "Volkswagen flags a tough year ahead as 2025 profit halves on tariffs, China competition. Volkswagen ",
+      "negative": 0.976,
+      "stress": 0.9672999999999999
+    },
+    {
+      "text": "Shortage of commercial LPG could hit 50% of hotels and restuarants in Mumbai: Industry bodies. A sev",
+      "negative": 0.9682,
+      "stress": 0.9607
+    },
+    {
+      "text": "A top economist says he sees a 'very significant' recession coming in 2027 as fiscal stimulus and AI",
+      "negative": 0.9654,
+      "stress": 0.9531000000000001
+    },
+    {
+      "text": "Indian restaurants warn of shutdowns as Iran war makes LPG scarce. India's hospitality sector faces ",
+      "negative": 0.955,
+      "stress": 0.9473999999999999
+    },
+    {
+      "text": "Pok\u00e9mon Pokopia is sold out at many major retailers, but it\u2019s really not difficult to see why. Pok\u00e9m",
+      "negative": 0.9577,
+      "stress": 0.9468
+    }
+  ],
+  "top_positive": [
+    {
+      "text": "Esperion Reports Fourth Quarter and Full Year 2025 Financial Results and Provides Business Update. \u2013",
+      "positive": 0.9499,
+      "stress": -0.9339999999999999
+    },
+    {
+      "text": "Stagwell Posts $2.9B Revenue for 2025 and Predicts Record New Business Ahead. Stagwell reported mode",
+      "positive": 0.9481,
+      "stress": -0.9288000000000001
+    },
+    {
+      "text": "HBX Group and Traveloka expand strategic partnership to deepen APAC supply and accelerate global dis",
+      "positive": 0.944,
+      "stress": -0.9284
+    },
+    {
+      "text": "Pharma and PSU banks emerge as safe havens as markets navigate volatility. Indian equities showed st",
+      "positive": 0.9457,
+      "stress": -0.9166
+    },
+    {
+      "text": "LiveOne (Nasdaq: LVO) Signs Multi-Year Extension with Merlin. LOS ANGELES, March 10, 2026 (GLOBE NEW",
+      "positive": 0.9225,
+      "stress": -0.9126
+    }
+  ],
+  "timestamp": "2026-03-11"
+}
