@@ -30,7 +30,7 @@ async def lifespan(app: FastAPI):
     try:
         ml_model.load(artifacts_dir)
     except FileNotFoundError:
-        print("⚠️  No artifacts found. Place files in artifacts/ directory.")
+        print("No artifacts found. Place files in artifacts/ directory.")
         print("    Endpoints will return fallback data.")
 
     try:

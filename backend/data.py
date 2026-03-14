@@ -211,7 +211,7 @@ def _load_finbert():
         "ProsusAI/finbert"
     )
     _finbert_model.eval()
-    print("FinBERT loaded ✅")
+    print("FinBERT loaded")
   return _finbert_tokenizer, _finbert_model
 
 def fetch_news_sentiment() -> dict:
