@@ -219,7 +219,7 @@ export default function ThreatMap({ indicators = [] }) {
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                         <span style={{ fontSize: '8px', textTransform: 'uppercase' }}>{ind.key.replace(/_/g, ' ')}</span>
                         <span style={{ fontSize: '11px', fontFamily: "'JetBrains Mono', monospace", color: ind.color }}>
-                          {ind.value !== undefined ? ind.value.toFixed(2) : '——'}
+                          {ind.value !== null && ind.value !== undefined ? Number(ind.value).toFixed(2) : '——'}
                         </span>
                       </div>
                       <div style={{ width: '100%', height: '2px', background: 'var(--border)' }}>
